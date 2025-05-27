@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #0F2C59;
+  --secondary: #164B85;
+  --accent: #F9B572;
+  --success: #4CAF50;
+  --warning: #FF9800;
+  --error: #F44336;
+  --light: #F5F5F5;
+  --dark: #333333;
+  --gray: #6B7280;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-body text-dark;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  p {
+    @apply text-base leading-relaxed;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto max-w-7xl;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium transition duration-300 rounded-md;
+  }
+  
+  .btn-primary {
+    @apply bg-accent text-dark hover:bg-accent/90;
+  }
+  
+  .btn-outline {
+    @apply border border-accent text-accent hover:bg-accent hover:text-dark;
+  }
+  
+  .section {
+    @apply py-16 md:py-24;
+  }
+  
+  .section-title {
+    @apply mb-2 text-3xl font-bold text-primary md:text-4xl;
+  }
+  
+  .section-subtitle {
+    @apply mb-12 text-lg text-gray;
+  }
+  
+  .card {
+    @apply overflow-hidden transition-all duration-300 bg-white rounded-lg shadow-md hover:shadow-lg;
+  }
+  
+  .fade-in {
+    @apply opacity-0 transition-opacity duration-1000;
+  }
+  
+  .fade-in.appear {
+    @apply opacity-100;
+  }
+}
+
+.service-card {
+  @apply flex flex-col h-full p-6 transition-all duration-300 bg-white rounded-lg shadow hover:shadow-xl hover:-translate-y-1;
+}
+
+.service-icon {
+  @apply flex items-center justify-center w-16 h-16 mx-auto mb-4 text-white rounded-full bg-primary;
+}
+
+.testimonial-card {
+  @apply p-6 mb-8 bg-white rounded-lg shadow-md;
+}
+
+.project-card {
+  @apply relative overflow-hidden rounded-lg shadow-md cursor-pointer;
+}
+
+.project-overlay {
+  @apply absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-white transition-all duration-300 bg-primary/80 opacity-0 group-hover:opacity-100;
+}
