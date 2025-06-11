@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import ThankYouPage from './pages/ThankYouPage';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -39,6 +40,8 @@ function App() {
         return <AboutPage />;
       case 'contact':
         return <ContactPage />;
+      case 'thank-you':
+        return <ThankYouPage />;
       case 'home':
       default:
         return <HomePage />;

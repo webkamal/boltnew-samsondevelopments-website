@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,6 +26,36 @@ const ContactSection: React.FC = () => {
       fadeElements?.forEach((el) => observer.unobserve(el));
     };
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formspree.io/f/mqabpgpy', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        // Redirect to thank you page
+        window.location.hash = 'thank-you';
+      } else {
+        setSubmitMessage('There was an error sending your message. Please try again.');
+      }
+    } catch (error) {
+      setSubmitMessage('There was an error sending your message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section ref={sectionRef} id="contact" className="section">
@@ -86,12 +118,13 @@ const ContactSection: React.FC = () => {
 
           {/* Contact Form */}
           <div className="fade-in">
-            <form className="bg-white p-8 rounded-lg shadow-md">
+            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
               <div className="mb-6">
-                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray">Full Name</label>
+                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray">Full Name *</label>
                 <input 
                   type="text" 
                   id="name" 
+                  name="name"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Your Name"
                   required
@@ -99,10 +132,11 @@ const ContactSection: React.FC = () => {
               </div>
               
               <div className="mb-6">
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray">Email Address</label>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray">Email Address *</label>
                 <input 
                   type="email" 
                   id="email" 
+                  name="email"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="your.email@example.com"
                   required
@@ -114,6 +148,7 @@ const ContactSection: React.FC = () => {
                 <input 
                   type="tel" 
                   id="phone" 
+                  name="phone"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Your Phone Number"
                 />
@@ -123,6 +158,7 @@ const ContactSection: React.FC = () => {
                 <label htmlFor="service" className="block mb-2 text-sm font-medium text-gray">Service Needed</label>
                 <select 
                   id="service" 
+                  name="service"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <option value="">Select a Service</option>
@@ -136,9 +172,10 @@ const ContactSection: React.FC = () => {
               </div>
               
               <div className="mb-6">
-                <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray">Message</label>
+                <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray">Message *</label>
                 <textarea 
                   id="message" 
+                  name="message"
                   rows={4} 
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="How can we help you?"
@@ -146,11 +183,18 @@ const ContactSection: React.FC = () => {
                 ></textarea>
               </div>
               
+              {submitMessage && (
+                <div className="mb-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                  {submitMessage}
+                </div>
+              )}
+              
               <button 
                 type="submit" 
-                className="w-full btn btn-primary"
+                disabled={isSubmitting}
+                className="w-full btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
