@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+module.exports = {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Montserrat', 'sans-serif'],
-        body: ['Open Sans', 'sans-serif'],
+        heading: ['var(--font-montserrat)', 'sans-serif'],
+        body: ['var(--font-open-sans)', 'sans-serif'],
       },
       colors: {
         primary: '#0F2C59',
