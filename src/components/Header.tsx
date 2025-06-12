@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
-import Logo from './Logo';
-import NavLink from './NavLink';
+import React, { useState, useEffect } from "react";
+import { Menu, X, Phone } from "lucide-react";
+import Logo from "./Logo";
+import NavLink from "./NavLink";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,14 +16,14 @@ const Header: React.FC = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+        isScrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container flex items-center justify-between">
@@ -41,8 +41,8 @@ const Header: React.FC = () => {
 
         {/* CTA Button */}
         <div className="hidden lg:block">
-          <a 
-            href="tel:1300888777" 
+          <a
+            href="tel:1300356395"
             className="btn btn-primary flex items-center"
           >
             <Phone size={18} className="mr-2" />
@@ -65,15 +65,39 @@ const Header: React.FC = () => {
         <div className="lg:hidden bg-white shadow-lg">
           <div className="container py-4">
             <nav className="flex flex-col space-y-4">
-              <NavLink href="#home" label="HOME" onClick={() => setIsOpen(false)} />
-              <NavLink href="#services" label="SERVICES" onClick={() => setIsOpen(false)} />
-              <NavLink href="#projects" label="PROJECTS" onClick={() => setIsOpen(false)} />
-              <NavLink href="#about" label="ABOUT US" onClick={() => setIsOpen(false)} />
-              <NavLink href="#news" label="NEWS" onClick={() => setIsOpen(false)} />
-              <NavLink href="#contact" label="CONTACT" onClick={() => setIsOpen(false)} />
-              
-              <a 
-                href="tel:1300888777" 
+              <NavLink
+                href="#home"
+                label="HOME"
+                onClick={() => setIsOpen(false)}
+              />
+              <NavLink
+                href="#services"
+                label="SERVICES"
+                onClick={() => setIsOpen(false)}
+              />
+              <NavLink
+                href="#projects"
+                label="PROJECTS"
+                onClick={() => setIsOpen(false)}
+              />
+              <NavLink
+                href="#about"
+                label="ABOUT US"
+                onClick={() => setIsOpen(false)}
+              />
+              <NavLink
+                href="#news"
+                label="NEWS"
+                onClick={() => setIsOpen(false)}
+              />
+              <NavLink
+                href="#contact"
+                label="CONTACT"
+                onClick={() => setIsOpen(false)}
+              />
+
+              <a
+                href="tel:1300356395"
                 className="btn btn-primary justify-center mt-4"
                 onClick={() => setIsOpen(false)}
               >
